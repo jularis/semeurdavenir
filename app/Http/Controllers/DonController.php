@@ -13,7 +13,8 @@ class DonController extends Controller
      */
     public function index()
     {
-        //
+        $data['pageTitle'] = "Faire un don"; 
+        return view('dons',$data);
     }
 
     /**
