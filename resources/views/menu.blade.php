@@ -85,7 +85,7 @@
     </li>
 @endforeach
 <li class="list-item">
-<div class="header-navbar-text-1"><a href="donate-now.html" class="h-donate-btn">Faire un don</a></div>
+<div class="header-navbar-text-1"><a href="{{ route('dons.index')}}" class="h-donate-btn">Faire un don</a></div>
 </li>
 </ul>
 </li>

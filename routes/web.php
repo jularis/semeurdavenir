@@ -2,6 +2,7 @@
 
 use App\Models\Espace;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DonController;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,7 @@ Route::get('news/agenda', [AgendaController::class,'index'])->name('agenda.index
 Route::get('news/agenda/{id}', [AgendaController::class,'show'])->name('agenda.show');
 Route::get('news/mediatheque', [MediathequeController::class,'index'])->name('mediatheque.index');
 Route::get('news/mediatheque/{id}', [MediathequeController::class,'show'])->name('mediatheque.show');
+Route::resource('dons', DonController::class);
 Route::resource('contactez-nous', ContactController::class);
 
 Route::get('/dashboard', function () {
