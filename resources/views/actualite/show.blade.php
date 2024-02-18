@@ -13,7 +13,7 @@
                                 <div class="page-title-inner">
 									<div id="breadcrumb" class="breadcrumb margin-bottom-10">
                                         <a href="{{ url('') }}" class="theme-color">Accueil</a> 
-                                        <a href="{{route('espace-communautaire.show', $detail->slugcat)}}" class="theme-color"><span class="current">{{$detail->name}}</span></a>
+                                        <a href="{{route('actualite.show', $detail->slugcat)}}" class="theme-color"><span class="current">{{$detail->name}}</span></a>
                                         
                                     </div>
                                     <h1 class="page-title mb-0">{{ $detail->titre }}</h1>

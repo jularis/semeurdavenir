@@ -1668,6 +1668,4 @@
 		});
 	}
 	
-})( jQuery );
-
-document.getElementById("copy-year").innerHTML = new Date().getFullYear();
+})( jQuery ); 

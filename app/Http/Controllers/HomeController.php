@@ -82,12 +82,16 @@ $data['equipe'] = Post::select('posts.*','name','c.slug as slugcat','c.id as idc
                                         ->orderby('id','desc')
                                         ->get(); 
 
-    $data['actualites'] = News::join('categories as c','news.category_id','=','c.id')
-                                        ->where([['status','PUBLISHED'],['category_id','30']])
+    $data['actus'] = News::join('categories as c','news.category_id','=','c.id')
+                                        ->where([
+                                            ['news.status','PUBLISHED'],
+                                            ['category_id','30']
+                                            ])
                                         ->select('news.*','name','c.slug as slugcat','c.id as idcat')
                                         ->limit(6)
                                         ->orderby('id','desc')
                                         ->get(); 
+                                        
         return view('home', $data);
     }
 

@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('title', $pageTitle)
 @section('content')
+<style type="text/css">
+    .error{
+  color: #e72121;
+  font-size: 12px;
+}
+</style>
    <!-- page-header -->
    <div class="page-title-wrap typo-white">
                 <div class="page-title-wrap-inner section-bg-img" data-bg="{{ asset('public/assets/images/page-title.jpg') }}">
@@ -36,9 +42,9 @@
 											</div>
 											<div class="feature-content">
 												<div class="feature-title">
-													<h5 class="mb-2">Our Location</h5>
+													<h5 class="mb-2">Localisation</h5>
 												</div>
-												<p class="mb-0">684 West College St. Sun City, United States America.</p>
+												<p class="mb-0">{{setting('site.ContactAdresse')}}</p>
 											</div>											
 										</div>
 									</div>
@@ -52,11 +58,11 @@
 											</div>
 											<div class="feature-content">
 												<div class="feature-title">
-													<h5 class="mb-2">Phone Number</h5>
+													<h5 class="mb-2">Contacts</h5>
 												</div>
-												<a href="tel:(+55)654-545-5418">(+55) 654 - 545 - 5418</a>
+												<a href="tel:{{setting('site.ContactPhone')}}">{{setting('site.ContactPhone')}}</a>
 												<br>
-												<a href="tel:(+55)654-545-1235">(+55) 654 - 545 - 1235</a>
+												<a href="tel:{{setting('site.ContactMobile')}}">{{setting('site.ContactMobile')}}</a>
 											</div>											
 										</div>
 									</div>
@@ -70,11 +76,13 @@
 											</div>
 											<div class="feature-content">
 												<div class="feature-title">
-													<h5 class="mb-2">Email Address</h5>
+													<h5 class="mb-2">Email</h5>
 												</div>
-												<a href="mailto:info@example.com">info@example.com</a>
+												<a href="mailto:{{setting('site.ContactEmail')}}">{{setting('site.ContactEmail')}}</a>
 												<br>
-												<a href="mailto:info@zegen.com">info@zegen.com</a>
+												<a href="mailto:{{setting('site.ContactEmail2')}}">{{setting('site.ContactEmail2')}}</a>
+                                                <br>
+												<a href="mailto:{{setting('site.ContactEmail3')}}">{{setting('site.ContactEmail3')}}</a>
 											</div>											
 										</div>
 									</div>
@@ -95,44 +103,69 @@
                                     <div class="contact-form-4 bg-white">
                                         <!-- Form -->
                                         <div class="contact-form-wrap">
+                                        @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                            <p>{{ $error }}</p>
+                                        @endforeach
+                            </div>
+                                </div>
+                            @endif
+			@if(session()->has('error'))
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ session()->get('error') }}                   
+                </div>
+                @endif 
+                @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ session()->get('success') }}
+                </div>
+              
+                @endif
                                             <!-- form inputs -->
-                                            <form id="contact-form" class="contact-form" action=" " enctype="multipart/form-data">
+                                            <form id="contactForm" class="contact-form" action="<?php echo route('contactez-nous.store') ?>" enctype="multipart/form-data">
+                                            @csrf
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <!-- form group -->
                                                         <div class="form-group">
-                                                            <input id="name" class="form-control" name="name" placeholder="Name" data-bv-field="name" type="text">
+                                                            <input id="nom" class="form-control" name="nom" placeholder="Votre nom & prénoms..." type="text" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <!-- form group -->
                                                         <div class="form-group">
-                                                            <input id="email" class="form-control" name="email" placeholder="Email" data-bv-field="email" type="email">
+                                                            <input id="email" class="form-control" name="email" placeholder="Votre adresse Email..." type="email" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <!-- form group -->
                                                         <div class="form-group">                                                            
-															<input id="phone" class="form-control" name="phone" placeholder="Phone" data-bv-field="phone" type="text">
+															<input id="objet" class="form-control" name="objet" placeholder="L'objet du message..." type="text" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="contact-message">
                                                             <!-- form group -->
                                                             <div class="form-group">
-                                                                <textarea id="message" class="form-control textarea" rows="5" name="message" placeholder="Your Message" data-bv-field="message"></textarea>
+                                                                <textarea id="message" class="form-control textarea" rows="5" name="message" placeholder="Votre message..." required></textarea>
                                                             </div>
                                                         </div> 
 														<!-- form group --> 
+                                                        <input type="hidden" name="to" value="{{ setting('site.ContactEmail') }}">
                                                         <!-- form button -->
-                                                        <button type="submit" id="contact-submit" class="btn btn-default mt-0 theme-btn">Send Now</button>
+                                                        <button type="submit" id="contact-submit" class="btn btn-default mt-0 theme-btn">Envoyer</button>
                                                     </div>
                                                 </div>
                                                 <span class="clearfix"></span>
+                                                
                                             </form>
 											 
-                                            <!-- form inputs end -->
-                                            <p id="contact-status-msg" class="hide"></p>
+                                            <!-- form inputs end --> 
+                                            <div class="contact-result"></div>
                                         </div>
                                         <!-- Form End-->
                                     </div>
@@ -199,8 +232,8 @@ $(function () {
   },
   messages: {
     nom: "Le champ Nom est obligatoire. *",
-    objet: "Le champ Nom est obligatoire. *",
-    message: "Le champ Nom est obligatoire. *",
+    objet: "Le champ Objet est obligatoire. *",
+    message: "Le champ Message est obligatoire. *",
     email: "Le champ Email est obligatoire et doit être une adresse valide. *"
   }, 
   debug:false,

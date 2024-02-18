@@ -151,7 +151,7 @@
 										</div>
 										<!-- .day-counter-wrapper -->
 										<div class="button-section text-center margin-top-35">
-											<a class="btn btn-default" href="events.html" title="Learn More">Voir tous les évènements</a>
+											<a class="btn btn-default" href="{{ route('agenda.index') }}" title="Learn More">Voir tous les évènements</a>
 										</div>
 									</div>
 								</div>
@@ -171,8 +171,8 @@
 														<div class="media-body align-self-center">
 															<!-- Ministries Content -->
 															<div class="event-content">
-																<div class="event-title"><h5><a href="event-details.html"><?php echo Str::limit($data->titre,90); ?></a></h5></div>
-																<div class="read-more"><a href="event-details.html">Voir le Details</a></div>
+																<div class="event-title"><h5><a href="{{ route('agenda.show', $data->slug)}}"><?php echo Str::limit($data->titre,90); ?></a></h5></div>
+																<div class="read-more"><a href="{{ route('agenda.show', $data->slug)}}">Voir le detail</a></div>
 															</div>
 														</div>
 													</div>
@@ -260,12 +260,12 @@
 													<span class="border-bottom bg-white"></span>											
 												</div>
 												<div class="pad-top-">
-													<p class="margin-bottom-20 typo-white">Vous souhaitez rejoindre Semeur d’Avenir en tant que membre, nous vous invitons officiellement à signifier votre appartenance et nous permettre d’assurer un meilleur suivi spirituel auprès de vous.</p>
+													<p class="margin-bottom-20 typo-white">Vous souhaitez rejoindre Semeur d'Avenir en tant que membre, nous vous invitons officiellement à signifier votre appartenance et nous permettre d'assurer un meilleur suivi spirituel auprès de vous.</p>
 												</div>
 											</div>
 											<!-- subscribe form -->
 											<div class="button-section text-center">
-										<a class="btn btn-warning" href="formulaire.html" title="Lire la suite">Cliquez ici pour accéder au formulaire</a>
+										<a class="btn btn-warning" href="{{ url('/a-propos-de-nous/devenir-membre') }}" title="Lire la suite">Cliquez ici pour accéder au formulaire</a>
 									</div>
 										</div>	
 									</div>
@@ -364,7 +364,7 @@
                                                 </div>
                                             </div>
                                             <div class="flip-box-back">
-                                                <h3 class="flip-box-title">Call Us</h3>
+                                                <h3 class="flip-box-title">Appelez-nous</h3>
                                                 <div class="flip-content">
                                                     <p>{{setting('site.ContactAdresse')}}</p>
                                                     <p><a href="tel:+8(123)985789">{{setting('site.ContactPhone')}}</a></p>
@@ -381,7 +381,7 @@
                                                 <h2 class="section-title margin-top-5">N'hésitez pas à nous contacter</h2> <span class="border-bottom"></span>
                                             </div>
                                             <div class="pad-top-15">
-                                                <p class="margin-bottom-10">Vous avez besoin de prière, d’une assistance particulière, ou vous souhaitez parler à un leader spirituel spirituel, 
+                                                <p class="margin-bottom-10">Vous avez besoin de prière, d'une assistance particulière, ou vous souhaitez parler à un leader spirituel spirituel, 
 Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 </p>
                                             </div>
@@ -451,7 +451,7 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 																		<a href="{{ $audio }}" class="popup-audio" title="Audio" download=""><i class="ti-music"></i></a>
 																	</li>
 																	<li>
-																		<a href="{{ $pdf }}" class="sermon-pdf" title="PDF" target="_blank"><i class="ti-book"></i></a>
+																		<a href="{{ $pdf }}" class="sermon-pdf" title="PDF" ><i class="ti-book"></i></a>
 																	</li>
 																</ul>													    
 															</div>												
@@ -474,7 +474,7 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 														</div>
 														<div class="post-meta bottom-meta margin-top-20">
 															<div class="sermon-link">
-																<a target="_blank" href="{{route('espace-communautaire.show', $data->slug)}}" class="link theme-color">Lire la suite</a>
+																<a  href="{{route('espace-communautaire.show', $data->slug)}}" class="link theme-color">Lire la suite</a>
 															</div>
 														</div>
 													</div>
@@ -493,7 +493,7 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 						@endif
 						<!-- Sermon Section End -->
 						<!-- Blog Section -->
-						@if($actualites->count())
+						@if($actus->count())
 						<section class="blog-section pad-top-none">
 							<div class="container">
 								<!-- Blog Wrap -->
@@ -510,7 +510,8 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 											<!--Blog Main Slider-->
 											<div class="owl-carousel blog-main-wrapper blog-style-1" data-loop="1" data-nav="0" data-dots="1" data-autoplay="0" data-autoplaypause="1" data-autoplaytime="5000" data-smartspeed="1000" data-margin="30" data-items="3" data-items-tab="2" data-items-mob="1">
 												<!--Item-->
-												@foreach ($activites as $data) 
+											
+												@foreach($actus as $data) 
 												<div class="item">
 													<!--Blog Inner-->
 													<div class="blog-inner">
@@ -518,20 +519,20 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 															<img src="{{ asset('storage/app/public/'.str_replace('\\','/',$data->image)) }}" class="img-fluid" width="768" height="600" alt="blog-img" style="height: 280px; overflow:hidden;" />
 															<div class="top-meta">
 																<ul class="top-meta-list">
-																<li><div class="post-date"><a href="blog.html"><i class="ti-calendar"></i>{{ date('d M Y', strtotime($data->created_at))}}</a></div></li>
+																<li><div class="post-date"><a href="{{ route('actualites.show', $data->slug)}}"><i class="ti-calendar"></i>{{ date('d M Y', strtotime($data->created_at))}}</a></div></li>
 																</ul>
 															</div>
 														</div>
 														<div class="blog-details">
 															<div class="blog-title">
-																<h4 class="margin-bottom-10"><a href="blog.html" class="blog-name">{{ Str::limit($data->titre, 55)}}</a></h4>
+																<h4 class="margin-bottom-10"><a href="{{ route('actualites.show', $data->slug)}}" class="blog-name">{{ Str::limit($data->titre, 55)}}</a></h4>
 															</div>
 															<div class="entry-content">
                                                             <p><?php echo Str::limit($data->resume,130); ?></p>
                                                         </div>
 															<div class="post-desc mt-2">
 																<div class="blog-link">
-																	<a target="_blank" href="blog.html" class="link font-w-500">Lire la suite</a>
+																	<a  href="{{ route('actualites.show', $data->slug)}}" class="link font-w-500">Lire la suite</a>
 																</div>
 															</div>
 														</div>

@@ -74,7 +74,7 @@
 																		<a href="{{ $audio }}" class="popup-audio" title="Audio" download=""><i class="ti-music"></i></a>
 																	</li>
 																	<li>
-																		<a href="{{ $pdf }}" class="sermon-pdf" title="PDF" target="_blank"><i class="ti-book"></i></a>
+																		<a href="{{ $pdf }}" class="sermon-pdf" title="PDF" ><i class="ti-book"></i></a>
 																	</li>
 																</ul>													    
 															</div>												
@@ -100,7 +100,7 @@
 														</div>
 														<div class="post-meta bottom-meta margin-top-20">
 															<div class="sermon-link">
-																<a target="_blank" href="{{route('espace-communautaire.show', $data->slug)}}">Lire la suite</a>
+																<a  href="{{route('espace-communautaire.show', $data->slug)}}">Lire la suite</a>
 															</div>
 														</div>
 													</div>	

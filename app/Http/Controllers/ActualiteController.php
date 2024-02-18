@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Espace;
+use App\Models\News;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Post;
 
-class ProjetController extends Controller
+class ActualiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +16,16 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        $data['res'] = Post::select('posts.*','name','c.slug as slugcat','parent_id')
-        ->join('categories as c','posts.category_id','=','c.id')
+        $data['res'] = News::select('news.*','name','c.slug as slugcat','parent_id')
+        ->join('categories as c','news.category_id','=','c.id')
         ->where([
-            ['posts.status','PUBLISHED'],
-            ['c.id','5']
-            ])
-        ->inRandomOrder()
-        ->orderby('posts.id','desc')
+            ['news.status','PUBLISHED'],
+            ['category_id','30']
+            ]) 
+        ->orderby('news.id','desc')
         ->paginate(10);
-        $data['pageTitle'] = 'Nos pojets réalisés'; 
-        return view('projets.index',$data);
+        $data['pageTitle'] = 'Nos actualités'; 
+        return view('actualite.index',$data);
     }
 
     /**
@@ -57,31 +58,31 @@ class ProjetController extends Controller
     public function show($id)
     {
         $data['res'] = '';
-        $data['res'] = Post::join('categories as c','posts.category_id','=','c.id')
-        ->select('posts.*','name','c.slug as slugcat','parent_id','c.id as idcat')
-        ->Where(function($query) use ($id) {
-            $query->orwhere('posts.slug', $id)
+        $data['res'] = News::join('categories as c','news.category_id','=','c.id')
+        ->select('news.*','name','c.slug as slugcat','parent_id','c.id as idcat')
+        ->where(function($query) use ($id) {
+            $query->orwhere('news.slug', $id)
                   ->orwhere('c.slug', $id)
-                  ->where('posts.status','PUBLISHED');
-        })  
-        ->orderby('posts.id','desc') 
-        ->get();
-        
+                  ->where('news.status','PUBLISHED');
+        }) 
+        ->orderby('news.id','desc') 
+        ->paginate(10);
 
         if(!empty($data['res']) && count($data['res']) >1){
             $data['pageTitle'] = $data['res'][0]->name; 
-             
-                return view('projets.index',$data);
-              
+            
+                return view('actualite.index',$data);
         }else{
 
-            if(count($data['res'])==0){ $data['res'] = '';  $data['pageTitle'] = 'Nos projets réalisés';}
+            if(count($data['res'])==0){ 
+                $data['res'] = '';  $data['pageTitle'] = 'Nos actualites';
+            }
             else {$data['detail'] = $data['res'][0];
-            $data['pageTitle'] = $data['detail']->title;}
+            $data['pageTitle'] = $data['detail']->Titre;}
 
-            return view('projets.show',$data);
+            return view('actualite.show',$data);
         } 
-    } 
+    }
 
     /**
      * Show the form for editing the specified resource.

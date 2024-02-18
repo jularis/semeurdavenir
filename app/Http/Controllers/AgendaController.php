@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Formation;
-use Illuminate\Http\Request; 
+use App\Models\Espace;
+use App\Models\Event;
+use Illuminate\Http\Request;
+use TCG\Voyager\Models\Post;
 
-class FormationController extends Controller
+class AgendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,16 +16,13 @@ class FormationController extends Controller
      */
     public function index()
     {
-        $data['res'] = Formation::select('formations.*','name','c.slug as slugcat','parent_id')
-        ->join('categories as c','formations.category_id','=','c.id')
-        ->where([
-            ['formations.status','PUBLISHED']
-            ])
-        ->inRandomOrder()
-        ->orderby('formations.id','desc')
+        $data['res'] = Event::where([
+            ['status','PUBLISHED']
+            ]) 
+        ->orderby('date_debut','desc')
         ->paginate(10);
-        $data['pageTitle'] = 'Nos formations'; 
-        return view('formations.index',$data);
+        $data['pageTitle'] = 'Nos évènements'; 
+        return view('event.index',$data);
     }
 
     /**
@@ -56,29 +55,21 @@ class FormationController extends Controller
     public function show($id)
     {
         $data['res'] = '';
-        $data['res'] = Formation::join('categories as c','formations.category_id','=','c.id')
-        ->select('formations.*','name','c.slug as slugcat','parent_id','c.id as idcat')
-        ->where(function($query) use ($id) {
-            $query->orwhere('formations.slug', $id)
-                  ->orwhere('c.slug', $id)
-                  ->where('formations.status','PUBLISHED');
-        }) 
-        ->orderby('formations.id','desc') 
-        ->get();
+        $data['res'] = Event::where([['slug', $id],['status','PUBLISHED']])->orderby('date_debut','desc')->paginate(10);
 
         if(!empty($data['res']) && count($data['res']) >1){
             $data['pageTitle'] = $data['res'][0]->name; 
             
-                return view('formations.index',$data);
+                return view('event.index',$data);
         }else{
 
             if(count($data['res'])==0){ 
-                $data['res'] = '';  $data['pageTitle'] = 'Nos formations';
+                $data['res'] = '';  $data['pageTitle'] = 'Nos actualites';
             }
             else {$data['detail'] = $data['res'][0];
-            $data['pageTitle'] = $data['detail']->titre;}
+            $data['pageTitle'] = $data['detail']->Titre;}
 
-            return view('formations.show',$data);
+            return view('event.show',$data);
         } 
     }
 

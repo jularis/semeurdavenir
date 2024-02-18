@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AProposDeNou;
 use App\Models\Category;
 use App\Models\Equipe;
+use App\Models\Membre;
 use App\Models\Pays;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Post;
@@ -39,9 +40,156 @@ class EntrepriseController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validez les données du formulaire si nécessaire
+        $validatedData = $request->validate([
+            'nom' => 'required|string',
+            'prenoms' => 'required|string',
+            'date_naissance' => 'required|date',
+            'ville_residence' => 'required|string',
+            'pays' => 'required|string', 
+            'adresse_email' => 'required|email',
+            'profession' => 'required|string',  
+        ]);
+        $member = new Membre();
 
+        // Attribuez manuellement les valeurs des champs
+        $member->nom = $request->nom;
+        $member->prenoms = $request->prenoms;
+        $member->date_naissance = $request->date_naissance;
+        $member->ville_residence = $request->ville_residence;
+        $member->pays_id = $request->pays;
+        $member->numero_whatsapp = $request->numero_whatsapp;
+        $member->adresse_email = $request->adresse_email;
+        $member->profession = $request->profession;
+        $member->accepte_jesus = $request->accepte_jesus;
+        $member->baptise_par_immersion = $request->baptise_par_immersion;
+        $member->annees_conversion = $request->annees_conversion;
+        $member->frequente_eglise = $request->frequente_eglise;
+        $member->eglise_frequente = $request->eglise_frequente;
+        $member->besoin_particulier = $request->besoin_particulier;
+
+        // Enregistrez les données dans la base de données
+        $member->save();
+
+        $message = $this->sendMail($_POST);
+        if($message=='success'){
+            $alert = ['success','Votre enregistrement a été envoyé avec succès. Nous vous repondrons dans les plus brefs délais.']; 
+        }
+        else{
+            $alert = ['error','Impossible d\'enregistrer votre inscription.Veuillez reessayer plus tard.']; 
+        } 
+     
+
+        return back()->with($alert);
+    }
+    protected function sendMail($data)
+      {
+          $nom=$data['nom'].' '.$data['prenoms']; 
+     $email=$data['adresse_email'];
+     $objet="Enregistrement d'un nouveau Membre";
+    
+     if($nom && $email && $objet)
+     {
+         $dest=$data['to']; 
+             $exp="$nom <$email>"; 
+      $headers="Content-type:text/html\nFrom:$exp\r\nReply-To:$exp"; 
+      
+      $texte='<!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Enregistrement d\'un nouveau Membre</title>
+      </head>
+      <body>
+          <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                  <th colspan="2" style="background-color: #f2f2f2; padding: 10px; text-align: left;">Nouvelle Inscription sur le Site Web</th>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Cher Administrateur,</td>
+                  <td style="padding: 10px; text-align: left;"></td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">J\'espère que ce message vous trouve bien. Je voulais vous informer qu\'un nouveau membre vient de s\'inscrire sur le site web. Voici les détails de l\'inscription :</td>
+                  <td style="padding: 10px; text-align: left;"></td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Nom du Membre :</td>
+                  <td style="padding: 10px; text-align: left;">[Nom Complet]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Date de naissance :</td>
+                  <td style="padding: 10px; text-align: left;">[Date de Naissance]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Ville de résidence :</td>
+                  <td style="padding: 10px; text-align: left;">[Ville]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Pays :</td>
+                  <td style="padding: 10px; text-align: left;">[Pays]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Numéro Whatsapp :</td>
+                  <td style="padding: 10px; text-align: left;">[Numéro Whatsapp]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Adresse e-mail :</td>
+                  <td style="padding: 10px; text-align: left;">[Adresse E-mail]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Profession :</td>
+                  <td style="padding: 10px; text-align: left;">[Profession]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà accepté Jésus-Christ comme votre sauveur personnel ? :</td>
+                  <td style="padding: 10px; text-align: left;">[Réponse à la question 9]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Combien d’années de conversion détenez-vous ? :</td>
+                  <td style="padding: 10px; text-align: left;">[Années de Conversion]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà fréquenté une église ? :</td>
+                  <td style="padding: 10px; text-align: left;">[Réponse à la question 11]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Laquelle si oui :</td>
+                  <td style="padding: 10px; text-align: left;">[Nom de l\'église]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Êtes-vous baptisés par immersion ? :</td>
+                  <td style="padding: 10px; text-align: left;">[Réponse à la question 12]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous un besoin particulier ? :</td>
+                  <td style="padding: 10px; text-align: left;">[Réponse à la question 13]</td>
+              </tr>
+              <tr>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Description du besoin :</td>
+                  <td style="padding: 10px; text-align: left;">[Description du besoin]</td>
+              </tr>
+          </table>
+      </body>
+      </html>
+      ';
+              if(mail($dest,$objet,$texte,$headers))
+              {
+                 $reponse='success';  
+              }
+              else
+              {
+                 $reponse='error'; 
+              }
+          }
+          else
+          {
+              $reponse='error';
+          }
+     return $reponse;
+      
+      }
     public function getRessource(Request $request)
     {
         $data['res'] = Post::select('posts.*','name','c.slug as slugcat','parent_id')

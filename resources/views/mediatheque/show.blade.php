@@ -13,7 +13,7 @@
                                 <div class="page-title-inner">
 									<div id="breadcrumb" class="breadcrumb margin-bottom-10">
                                         <a href="{{ url('') }}" class="theme-color">Accueil</a> 
-                                        <a href="{{route('espace-communautaire.show', $detail->slugcat)}}" class="theme-color"><span class="current">{{$detail->name}}</span></a>
+                                        <a href="{{route('mediatheque.show', $detail->slugcat)}}" class="theme-color"><span class="current">{{$detail->name}}</span></a>
                                         
                                     </div>
                                     <h1 class="page-title mb-0">{{ $detail->titre }}</h1>
@@ -117,6 +117,28 @@
                                                     <h3 class="margin-bottom-15"> <span class="theme-color">{{ $detail->titre}}</span></h3>
                                                 </div> 
                                                 <?php echo $detail->description; ?> 
+                                                <div class="row mb-20" id="lightgallery">
+                                        <?php  
+                                                              if($detail->galeries)
+                                                              {
+                                        $i=0; 
+                                        $images = json_decode($detail->galeries);  
+                                        foreach($images as $datas)
+                                  {
+                                          ?>
+                                                  <!-- Item 1 -->
+                                                  <div class="col-sm-4 col-md-4"> 
+                                                                  
+                                                                  <span data-exthumbimage="{{asset('storage/app/public/'.$datas)}}" data-src="{{asset('storage/app/public/'.$datas)}}" class="icon-bx-xs check-km" title="<?php echo stripslashes($pageTitle);?>">        
+                                                                        <a href="javascript:void(0);" class=""> <img src="{{asset('storage/app/public/'.$datas)}}" alt="images" ></a>
+                                                                      </span> 
+                                                      </div>
+                                                  <?php
+                                          $i++; 
+                                          }
+                                      }
+                                              ?>
+                                        </div>
                                             </div>
                                         </div>
                                         <!-- sermons-title-wrap -->
