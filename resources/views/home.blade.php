@@ -166,7 +166,7 @@
 											<div class="events-inner">
 												<div class="events-item">
 													<div class="media">
-														<div class="event-date me-4">{{ date('d M', strtotime($data->date_debut))}}<span class="event-time">{{ $data->heure_debut }}</span>
+														<div class="event-date me-4">{{ \Carbon\Carbon::parse($data->date_debut)->translatedFormat('d F')  }}<span class="event-time">{{ $data->heure_debut }}</span>
 														</div>
 														<div class="media-body align-self-center">
 															<!-- Ministries Content -->
