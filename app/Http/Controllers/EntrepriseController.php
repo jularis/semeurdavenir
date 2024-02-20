@@ -92,6 +92,7 @@ class EntrepriseController extends Controller
      {
          $dest=$data['to']; 
          $pays=Pays::where('id',$data->pays_id)->first();
+       
              $exp="$nom <$email>"; 
       $headers="Content-type:text/html\nFrom:$exp\r\nReply-To:$exp"; 
       

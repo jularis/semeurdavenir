@@ -244,7 +244,7 @@ $(function () {
         submitHandler: function (contactForm) {
             $(contactResult, contactForm).html('<img src="<?php echo url('') ?>/public/img/loading.gif" style="width: 110px;">');
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: '<?php echo route('a-propos-de-nous.store') ?>',
                 data: $(contactForm).serialize(),
                 timeout: 20000,
