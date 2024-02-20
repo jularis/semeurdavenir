@@ -84,7 +84,7 @@ class EntrepriseController extends Controller
     }
     protected function sendMail($data)
       {
-          $nom=$data['nom'].' '.$data['prenoms']; 
+    $nom=$data['nom'].' '.$data['prenoms']; 
      $email=$data['adresse_email'];
      $objet="Enregistrement d'un nouveau Membre";
     
