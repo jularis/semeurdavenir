@@ -200,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="to" value="{{ setting('site.ContactEmail2') }}">
+            <input type="hidden" name="to" value="{{ setting('site.ContactEmail') }}">
             <button type="submit" class="btn btn-primary">Soumettre</button>
         </form>
         <div class="contact-result"></div>

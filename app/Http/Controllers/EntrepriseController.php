@@ -40,7 +40,7 @@ class EntrepriseController extends Controller
      */
     public function store(Request $request)
     {
-        // Validez les données du formulaire si nécessaire
+        // Validez les donn&eacute;es du formulaire si n&eacute;cessaire
         $validatedData = $request->validate([
             'nom' => 'required|string',
             'prenoms' => 'required|string',
@@ -68,12 +68,12 @@ class EntrepriseController extends Controller
         $member->eglise_frequente = $request->eglise_frequente;
         $member->besoin_particulier = $request->besoin_particulier;
 
-        // Enregistrez les données dans la base de données
+        // Enregistrez les donn&eacute;es dans la base de donn&eacute;es
         $member->save();
 
         $message = $this->sendMail($_POST);
         if($message=='success'){
-            $alert = ['success','Votre enregistrement a été envoyé avec succès. Nous vous repondrons dans les plus brefs délais.']; 
+            $alert = ['success','Votre enregistrement a &eacute;t&eacute; envoy&eacute; avec succès. Nous vous repondrons dans les plus brefs d&eacute;lais.']; 
         }
         else{
             $alert = ['error','Impossible d\'enregistrer votre inscription.Veuillez reessayer plus tard.']; 
@@ -110,7 +110,7 @@ class EntrepriseController extends Controller
                   <td colspan="2" style="width: 30%; padding: 10px; text-align: left;">Cher Administrateur,</td> 
               </tr>
               <tr>
-                  <td colspan="2" style="width: 30%; padding: 10px; text-align: left;">J\'espère que ce message vous trouve bien. Je voulais vous informer qu\'un nouveau membre vient de s\'inscrire sur le site web. Voici les détails de l\'inscription :</td> 
+                  <td colspan="2" style="width: 30%; padding: 10px; text-align: left;">J\'espère que ce message vous trouve bien. Je voulais vous informer qu\'un nouveau membre vient de s\'inscrire sur le site web. Voici les d&eacute;tails de l\'inscription :</td> 
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Nom du Membre</td>
@@ -121,7 +121,7 @@ class EntrepriseController extends Controller
                   <td style="padding: 10px; text-align: left;">'.date('d-m-Y', strtotime($data['date_naissance'])).'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Ville de résidence</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Ville de r&eacute;sidence</td>
                   <td style="padding: 10px; text-align: left;">'.$data['ville_residence'].'</td>
               </tr>
               <tr>
@@ -129,7 +129,7 @@ class EntrepriseController extends Controller
                   <td style="padding: 10px; text-align: left;">'.$pays->name.'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Numéro Whatsapp</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Num&eacute;ro Whatsapp</td>
                   <td style="padding: 10px; text-align: left;">'.$data['numero_whatsapp'].'</td>
               </tr>
               <tr>
@@ -141,15 +141,15 @@ class EntrepriseController extends Controller
                   <td style="padding: 10px; text-align: left;">'.$data['profession'].'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà accepté Jésus-Christ comme votre sauveur personnel ?</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous d&eacute;jà accept&eacute; J&eacute;sus-Christ comme votre sauveur personnel ?</td>
                   <td style="padding: 10px; text-align: left;">'.$data['accepte_jesus'].'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Combien d’années de conversion détenez-vous ?</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Combien d’ann&eacute;es de conversion d&eacute;tenez-vous ?</td>
                   <td style="padding: 10px; text-align: left;">'.$data['annees_conversion'].'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà fréquenté une église ?</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous d&eacute;j&agrave; fr&eacute;quent&eacute; une &eacute;glise ?</td>
                   <td style="padding: 10px; text-align: left;">'.$data['frequente_eglise'].'</td>
               </tr>
               <tr>
@@ -157,7 +157,7 @@ class EntrepriseController extends Controller
                   <td style="padding: 10px; text-align: left;">'.$data['eglise_frequente'].'</td>
               </tr>
               <tr>
-                  <td style="width: 30%; padding: 10px; text-align: left;">Êtes-vous baptisés par immersion ?</td>
+                  <td style="width: 30%; padding: 10px; text-align: left;">Êtes-vous baptis&eacute;s par immersion ?</td>
                   <td style="padding: 10px; text-align: left;">'.$data['baptise_par_immersion'].'</td>
               </tr>
               <tr>
@@ -216,7 +216,7 @@ class EntrepriseController extends Controller
             $data['liste'] = Category::equipecategories()->get();
              
         if(count($data['liste'])){
-            $data['pageTitle'] = "Notre équipe"; 
+            $data['pageTitle'] = "Notre &eacute;quipe"; 
             
             return view('presentation.equipe',$data);
             
@@ -228,7 +228,7 @@ class EntrepriseController extends Controller
  
         if($id=='devenir-membre')
         {
-            $data['pageTitle'] = "Dévenir Membre"; 
+            $data['pageTitle'] = "D&eacute;venir Membre"; 
             $data['pays'] = Pays::select('id', 'nicename')->get();
              
             return view('presentation.membre',$data); 
