@@ -13,7 +13,7 @@
                                 <div class="page-title-inner">
 									<div id="breadcrumb" class="breadcrumb margin-bottom-10">
                                         <a href="{{ url('') }}" class="theme-color">Accueil</a> 
-                                        <a href="{{ url('news/actualites/')}}" class="theme-color"><span class="current">{{$detail->name}}</span></a>
+                                        <a href="{{ url('a-propos-de-nous/notre-equipe/')}}" class="theme-color"><span class="current">Notre Equipe</span></a>
                                         
                                     </div>
                                     <h1 class="page-title mb-0">{{ $detail->titre }}</h1>
@@ -52,69 +52,35 @@
                                     <!-- Col -->
                                     <div class="col-md-12"> 
                                         <!-- sermons-view-wrap -->
-                                        @php
-												$pdf = $audio = '';
-												if(isset($detail->fichier_pdf) && $detail->fichier_pdf !=null)
-												{
-												$pdf = json_decode($detail->fichier_pdf); 
-												$pdf = isset($pdf[0]) ? asset('storage/app/public/'.$pdf[0]->download_link) : ''; 
-												}
-												
-  												if(isset($detail->audio) && $detail->audio !='[]')
-												{
-												$audio = json_decode($detail->audio);
-												$audio = isset($audio[0]) ? asset('storage/app/public/'.$audio[0]->download_link) : '';
-												}
-
-												@endphp
+                                         
 										<div class="sermon-view-wrapper">
 											<div class="row">
 												<div class="col-md-6">
-													<h4 class="sermon-subtitle typo-white margin-bottom-20">Regardez</h4>
+													<h4 class="sermon-subtitle typo-white margin-bottom-20">Suivez-moi</h4>
 													<ul class="sermon-play-list">
 														<li>
-															<a href="{{ $detail->video }}" class="popup-youtube" title="Video" download=""><i class="ti-control-play"></i></a>
+                                                        <a href="{{$detail->facebook}}"><i class="ti-facebook"></i></a> 
 														</li>
 														<li>
-															<a href="{{ $audio }}" class="popup-audio" title="Audio" download=""><i class="ti-music"></i></a>
+                                                        <a href="{{$detail->youtube}}"><i class="ti-youtube"></i></a>	
 														</li>
 														<li>
-															<a href="{{ $pdf }}" class="sermon-pdf" title="PDF" ><i class="ti-book"></i></a>
+                                                        <a href="{{$detail->linkedin}}"><i class="ti-linkedin"></i></a>
 														</li>
 													</ul>
 												</div>
-												<div class="col-md-6">
-													<h4 class="sermon-subtitle text-right typo-white margin-bottom-20 text-right">Téléchargez</h4>
-													<ul class="sermon-tool-list text-right">
-														<li>
-															<a href="{{ $audio }}" class="sermon-audio-link" title="Audio" download><i class="ti-headphone"></i></a>
-														</li>														
-														<li>
-															<a href="{{ $pdf }}" class="sermon-pdf-link" title="PDF" download><i class="ti-book"></i></a>
-														</li> 
-													</ul>
+												<div class="col-md-6"> 
 												</div>
 											</div>
 										</div>
 										<!-- sermons-info-wrap -->
                                         <div class="sermon-info margin-bottom-15">
-											<ul>
-                                            <li>
-																		<span class="title">Catégorie:</span> <a href="#">{{ $detail->name}}</a>
-																	</li>
-																	<li>
-																		<span class="title">Date:</span>
-																	</li>
-																	<li class="ms-2">
-																		<a href="#"><i class="ti-time me-2"></i>{{ date('d M Y', strtotime($detail->created_at))}}</a>
-																	</li>
-												 
-											</ul>
+											 
 										</div>
                                         <div class="sermons-title-wrap pt-1 margin-top-30">
                                             <div class="sermons-content">
                                                 <div class="sermons-title pad-none margin-none">
-                                                    <h3 class="margin-bottom-15"> <span class="theme-color">{{ $detail->titre}}</span></h3>
+                                                    <h3 class="margin-bottom-15"> {{ $detail->titre}} :<span class="theme-color"> {{ $detail->poste}}</span></h3>
                                                 </div> 
                                                 <?php echo $detail->description; ?> 
                                             </div>

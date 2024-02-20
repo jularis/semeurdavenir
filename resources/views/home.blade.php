@@ -316,7 +316,7 @@
 														</div>												
 														<div class="team-details text-center pad-30">
 															<div class="team-name">
-																<h3 class="mb-0"><a href="#" class="client-name typo-white">{{ $data->titre}}</a></h3>
+																<h3 class="mb-0"><a href="{{route('equipe.show', $data->slug)}}" class="client-name typo-white">{{ $data->titre}}</a></h3>
 															</div>
 															<div class="team-designation mb-3"><p class="mb-0">{{$data->poste}}</p></div>
 															<div class="team-social social-icons">

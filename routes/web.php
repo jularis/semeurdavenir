@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonController;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\ContactController; 
@@ -26,6 +27,8 @@ use App\Http\Controllers\EspaceCommunautaireController;
 
 Route::get('', [HomeController::class, 'index'])->name('accueil.index');
 Route::get('sitemap', [HomeController::class, 'sitemap']); 
+Route::get('a-propos-de-nous/notre-equipe', [EquipeController::class,'index'])->name('equipe.index');
+Route::get('a-propos-de-nous/notre-equipe/{id}', [EquipeController::class,'show'])->name('equipe.show');
 Route::resource('a-propos-de-nous', EntrepriseController::class);
 Route::resource('espace-communautaire', EspaceCommunautaireController::class);
 Route::resource('nos-activites', ActiviteController::class);

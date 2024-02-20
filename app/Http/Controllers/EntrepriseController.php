@@ -207,24 +207,7 @@ class EntrepriseController extends Controller
     public function show($id)
     {
         
-        $data['liste'] = '';
-        if($id=='notre-equipe'){
-            // $data['liste'] = Equipe::join('categories as c','equipes.category_id','=','c.id')
-            //                     ->select('equipes.*','name','c.slug as slugcat','parent_id','c.id as idcat')
-            //                     ->where('equipes.status','PUBLISHED')
-            //                     ->get();
-            $data['liste'] = Category::equipecategories()->get();
-             
-        if(count($data['liste'])){
-            $data['pageTitle'] = "Notre &eacute;quipe"; 
-            
-            return view('presentation.equipe',$data);
-            
-        }else{ 
-            return redirect('/');
-        }
-         
-        }
+        $data['liste'] = ''; 
  
         if($id=='devenir-membre')
         {
