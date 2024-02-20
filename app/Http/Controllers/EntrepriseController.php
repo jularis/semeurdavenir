@@ -91,8 +91,9 @@ class EntrepriseController extends Controller
      if($nom && $email && $objet)
      {
          $dest=$data['to']; 
-         $pays=Pays::where('id',$data->pays_id)->first();
-       
+         
+         $pays=Pays::where('id',$data['pays'])->first();
+        
              $exp="$nom <$email>"; 
       $headers="Content-type:text/html\nFrom:$exp\r\nReply-To:$exp"; 
       
@@ -113,55 +114,55 @@ class EntrepriseController extends Controller
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Nom du Membre</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->nom.' '.$data->prenoms.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['nom'].' '.$data['prenoms'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Date de naissance</td>
-                  <td style="padding: 10px; text-align: left;">'.date('d-m-Y', strtotime($data->date_naissance)).'</td>
+                  <td style="padding: 10px; text-align: left;">'.date('d-m-Y', strtotime($data['date_naissance'])).'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Ville de résidence</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->ville_residence.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['ville_residence'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Pays</td>
-                  <td style="padding: 10px; text-align: left;">'.$pays->nicename.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$pays->name.'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Numéro Whatsapp</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->numero_whatsapp.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['numero_whatsapp'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Adresse e-mail</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->adresse_email.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['adresse_email'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Profession</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->profession.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['profession'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà accepté Jésus-Christ comme votre sauveur personnel ?</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->accepte_jesus.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['accepte_jesus'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Combien d’années de conversion détenez-vous ?</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->annees_conversion.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['annees_conversion'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous déjà fréquenté une église ?</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->frequente_eglise.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['frequente_eglise'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Laquelle si oui</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->eglise_frequente.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['eglise_frequente'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Êtes-vous baptisés par immersion ?</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->baptise_par_immersion.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['baptise_par_immersion'].'</td>
               </tr>
               <tr>
                   <td style="width: 30%; padding: 10px; text-align: left;">Avez-vous un besoin particulier ?</td>
-                  <td style="padding: 10px; text-align: left;">'.$data->besoin_particulier.'</td>
+                  <td style="padding: 10px; text-align: left;">'.$data['besoin_particulier'].'</td>
               </tr> 
           </table>
       </body>
