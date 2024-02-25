@@ -211,7 +211,7 @@ class EntrepriseController extends Controller
  
         if($id=='devenir-membre')
         {
-            $data['pageTitle'] = "D&eacute;venir Membre"; 
+            $data['pageTitle'] = "Dévenir Membre"; 
             $data['pays'] = Pays::select('id', 'nicename')->get();
              
             return view('presentation.membre',$data); 

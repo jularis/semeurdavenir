@@ -200,7 +200,7 @@
 										<div class="title-wrap text-center">
 											<div class="section-title">
 												<span class="sub-title theme-color text-uppercase">Semeur d'Avenir</span>
-												<h2 class="section-title margin-top-5">Nos activités</h2>
+												<h2 class="section-title margin-top-5">Nos minitères</h2>
 												<span class="border-bottom center"></span>											
 											</div>
 										</div>
@@ -236,7 +236,7 @@
 									</div>
 									<!--Ministries Owl Slider-->
 									<div class="button-section text-center">
-										<a class="btn btn-default" href="{{ route('nos-activites.index')}}" title="Lire la suite">Voir toutes nos activités</a>
+										<a class="btn btn-default" href="{{ route('nos-activites.index')}}" title="Lire la suite">Voir tous nos minitères</a>
 									</div>
 								</div>
 								<!-- Row -->
