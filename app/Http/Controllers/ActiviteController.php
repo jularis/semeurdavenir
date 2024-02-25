@@ -81,7 +81,7 @@ class ActiviteController extends Controller
             return redirect('/'); 
         }else{
 
-            if(count($data['res'])==0){ $data['res'] = '';  $data['pageTitle'] = 'Activités';}
+            if(count($data['res'])==0){ $data['res'] = '';  $data['pageTitle'] = 'Nos ministères';}
             else {$data['detail'] = $data['res'][0];
             $data['pageTitle'] = $data['detail']->titre;}
 

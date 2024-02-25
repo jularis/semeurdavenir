@@ -222,7 +222,7 @@
 													<!-- Ministries Content -->
 													<div class="ministries-content pad-lr-30 pad-top-25 pad-bottom-30">
 														<div class="ministries-title">										
-															<h4 class="text-center mb-0"><a href="{{ route('nos-activites.show',$data->slug)}}" class="ministries-link">{{ Str::limit($data->titre, 55)}}</a></h4>
+															<h4 class="text-center mb-0"><a href="{{ route('nos-ministeres.show',$data->slug)}}" class="ministries-link">{{ Str::limit($data->titre, 55)}}</a></h4>
 														</div>													
 													</div>
 												</div>
@@ -236,7 +236,7 @@
 									</div>
 									<!--Ministries Owl Slider-->
 									<div class="button-section text-center">
-										<a class="btn btn-default" href="{{ route('nos-activites.index')}}" title="Lire la suite">Voir tous nos minitères</a>
+										<a class="btn btn-default" href="{{ route('nos-ministeres.index')}}" title="Lire la suite">Voir tous nos minitères</a>
 									</div>
 								</div>
 								<!-- Row -->

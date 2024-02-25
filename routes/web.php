@@ -31,7 +31,7 @@ Route::get('a-propos-de-nous/notre-equipe', [EquipeController::class,'index'])->
 Route::get('a-propos-de-nous/notre-equipe/{id}', [EquipeController::class,'show'])->name('equipe.show');
 Route::resource('a-propos-de-nous', EntrepriseController::class);
 Route::resource('espace-communautaire', EspaceCommunautaireController::class);
-Route::resource('nos-activites', ActiviteController::class);
+Route::resource('nos-ministeres', ActiviteController::class);
 Route::get('news/actualites', [ActualiteController::class,'index'])->name('actualites.index');
 Route::get('news/actualites/{id}', [ActualiteController::class,'show'])->name('actualites.show');
 Route::get('news/agenda', [AgendaController::class,'index'])->name('agenda.index');
