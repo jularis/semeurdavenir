@@ -296,38 +296,34 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4">
-										<div class="testimonial-img relative">
-											<img class="img-fluid" src="{{ asset('public/assets/images/team/team-side.jpg') }}" width="485" height="730" alt="Testimonial Img">
-										</div>
-									</div>
-									<div class="col-md-8">
+									
+									<div class="col-md-12">
 										<!--Team Main Slider-->
 										<div class="owl-carousel team-main-wrapper" data-loop="1" data-nav="1" data-dots="0" data-autoplay="0" data-autoplaypause="1" data-autoplaytime="5000" data-smartspeed="1000" data-margin="30" data-items="2" data-items-tab="2" data-items-mob="1">
 											<!--Item-->
 											@foreach($equipes as $data)	
-											<div class="item">
-												<div class="team-style-1">
+
+											@php
+											$image = array("contact_bg1.jpg", "contact_bg2.jpg", "contact_bg3.jpg");
+											shuffle($image);  
+											@endphp	
+											<div class="item"> 
 													<!--Team Inner-->	
 																					
-													<div class="team-inner margin-bottom-20">												
-														<div class="team-thumb mb-0 relative">
-															<img src="{{ asset('storage/app/public/'.str_replace('\\','/',$data->image)) }}" class="img-fluid thumb w-100" width="480" height="485" alt="team-img" />														
-														</div>												
-														<div class="team-details text-center pad-30">
-															<div class="team-name">
-																<h3 class="mb-0"><a href="{{route('equipe.show', $data->slug)}}" class="client-name typo-white">{{ $data->titre}}</a></h3>
+													<div class="div-bg-img b-radius-20" data-bg="{{ asset('public/assets/images/contact/contact_bg1.jpg') }}">
+														<div class="f-box c-page text-center typo-white">
+															<div class="feature-icon margin-bottom-10"> 
 															</div>
-															<div class="team-designation mb-3"><p class="mb-0">{{$data->poste}}</p></div>
-															<div class="team-social social-icons">
-																<a href="{{$data->facebook}}"><span class="ti-facebook"></span></a> 				
-																<a href="{{$data->youtube}}"><span class="ti-youtube"></span></a>	
-																<a href="{{$data->linkedin}}"><span class="ti-linkedin"></span></a>
-															</div>
+															<div class="feature-content">
+																<div class="feature-title">
+																<a href="{{route('equipe.show', $data->slug)}}" class="client-name typo-white"><h5 class="mb-2">{{$data->titre}}</h5></a>
+																</div>
+																<p class="mb-0">{{$data->poste}}</p>
+															</div>											
 														</div>
-													</div>
+													</div>	
 													<!--Team Inner Ends-->
-												</div>
+												 
 											</div>
 											<!--Item Ends-->
 											@endforeach
@@ -342,56 +338,7 @@
 						</section>
 						@endif
 						<!-- Team Section End -->
-						<section class="contact-form-section typo-white section-bg-img o-visible pad-top-80 pad-bottom-160" data-bg="{{ asset('public/assets/images/bg/bg-2.jpg') }}" style="background-image: url({{ asset('public/assets/images/bg/bg-2.jpg') }});">
-                        <div class="shape-bottom" data-negative="false"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                                <path class="shape-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
-                                <path class="shape-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
-                                <path class="shape-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
-                            </svg> </div>
-                        <div class="container">
-                            <div class="row">
-                                <!-- col -->
-                                <div class="col-xl-4 pe-xl-4 pb-5 pb-xl-0">
-                                    <div class="flip-box broken-top-115 verticalMove">
-                                        <div class="flip-box-inner imghvr-flip-3d-horz">
-                                            <div class="flip-box-front">
-                                                <div class="flip-box-icon margin-bottom-40"><span class="text-center flip-icon-middle ti-headphone-alt"></span></div>
-                                                <h3 class="flip-box-title margin-bottom-30">Appelez-nous</h3>
-                                                <div class="flip-content">
-                                                    <p>{{setting('site.ContactAdresse')}}</p>
-                                                    <p><a href="tel:+8(123)985789">{{setting('site.ContactPhone')}}</a></p>
-                                                    <p><a href="mailto:{{setting('site.ContactEmail')}}">{{setting('site.ContactEmail')}}</a></p>
-                                                </div>
-                                            </div>
-                                            <div class="flip-box-back">
-                                                <h3 class="flip-box-title">Appelez-nous</h3>
-                                                <div class="flip-content">
-                                                    <p>{{setting('site.ContactAdresse')}}</p>
-                                                    <p><a href="tel:+8(123)985789">{{setting('site.ContactPhone')}}</a></p>
-                                                    <p><a href="mailto:{{setting('site.ContactEmail')}}">{{setting('site.ContactEmail')}}</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- col -->
-                                <div class="col-xl-8 ps-xl-4">
-                                    <div class="section-title-wrapper">
-                                        <div class="title-wrap mb-0">
-                                            <div class="section-title"> <span class="sub-title theme-color text-uppercase">Semeur d'Avenir</span>
-                                                <h2 class="section-title margin-top-5">N'hésitez pas à nous contacter</h2> <span class="border-bottom"></span>
-                                            </div>
-                                            <div class="pad-top-15">
-                                                <p class="margin-bottom-10">Vous avez besoin de prière, d'une assistance particulière, ou vous souhaitez parler à un leader spirituel spirituel, 
-Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
-</p>
-                                            </div>
-                                        </div>
-                                        <div class="button-section margin-top-25"> <a class="btn btn-default" href="{{route('contactez-nous.index')}}" title="Learn More">Contactez-nous</a> </div>
-                                    </div>
-                                </div> <!-- .col -->
-                            </div>
-                        </div>
-                    </section>
+
 						<!-- Sermon Section -->
 						@if($predications->count())
 						<section id="section-sermon" class="sermon-section section-bg-img bg-align-left bg-theme pad-bottom-70" data-bg="{{ asset('public/assets/images/bg/bg-7.jpg') }}">
@@ -492,6 +439,56 @@ Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
 						</section>
 						@endif
 						<!-- Sermon Section End -->
+						<section class="contact-form-section typo-white section-bg-img o-visible pad-top-80 pad-bottom-160" data-bg="{{ asset('public/assets/images/bg/bg-2.jpg') }}" style="background-image: url({{ asset('public/assets/images/bg/bg-2.jpg') }});">
+                        <div class="shape-bottom" data-negative="false"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                                <path class="shape-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+                                <path class="shape-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+                                <path class="shape-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+                            </svg> </div>
+                        <div class="container">
+                            <div class="row">
+                                <!-- col -->
+                                <div class="col-xl-4 pe-xl-4 pb-5 pb-xl-0">
+                                    <div class="flip-box broken-top-115 verticalMove">
+                                        <div class="flip-box-inner imghvr-flip-3d-horz">
+                                            <div class="flip-box-front">
+                                                <div class="flip-box-icon margin-bottom-40"><span class="text-center flip-icon-middle ti-headphone-alt"></span></div>
+                                                <h3 class="flip-box-title margin-bottom-30">Appelez-nous</h3>
+                                                <div class="flip-content">
+                                                    <p>{{setting('site.ContactAdresse')}}</p>
+                                                    <p><a href="tel:+8(123)985789">{{setting('site.ContactPhone')}}</a></p>
+                                                    <p><a href="mailto:{{setting('site.ContactEmail')}}">{{setting('site.ContactEmail')}}</a></p>
+                                                </div>
+                                            </div>
+                                            <div class="flip-box-back">
+                                                <h3 class="flip-box-title">Appelez-nous</h3>
+                                                <div class="flip-content">
+                                                    <p>{{setting('site.ContactAdresse')}}</p>
+                                                    <p><a href="tel:+8(123)985789">{{setting('site.ContactPhone')}}</a></p>
+                                                    <p><a href="mailto:{{setting('site.ContactEmail')}}">{{setting('site.ContactEmail')}}</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- col -->
+                                <div class="col-xl-8 ps-xl-4">
+                                    <div class="section-title-wrapper">
+                                        <div class="title-wrap mb-0">
+                                            <div class="section-title"> <span class="sub-title theme-color text-uppercase">Semeur d'Avenir</span>
+                                                <h2 class="section-title margin-top-5">N'hésitez pas à nous contacter</h2> <span class="border-bottom"></span>
+                                            </div>
+                                            <div class="pad-top-15">
+                                                <p class="margin-bottom-10">Vous avez besoin de prière, d'une assistance particulière, ou vous souhaitez parler à un leader spirituel spirituel, 
+Appelez-nous ou écrivez-nous ! Nous serons heureux de vous servir !
+</p>
+                                            </div>
+                                        </div>
+                                        <div class="button-section margin-top-25"> <a class="btn btn-default" href="{{route('contactez-nous.index')}}" title="Learn More">Contactez-nous</a> </div>
+                                    </div>
+                                </div> <!-- .col -->
+                            </div>
+                        </div>
+                    </section>
 						<!-- Blog Section -->
 						@if($actus->count())
 						<section class="blog-section pad-top-none">

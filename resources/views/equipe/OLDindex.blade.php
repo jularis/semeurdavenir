@@ -44,24 +44,29 @@
 											<!-- Col-md -->
                                             
                                             @foreach($categ->listeEquipe as $data)
-                                            @php
-											$image = array("contact_bg1.jpg", "contact_bg2.jpg", "contact_bg3.jpg");
-											shuffle($image);  
-											@endphp	
+                                            
 											<div class="col-md-4">
-												<!--Team Inner-->	
-												<div class="div-bg-img b-radius-20" data-bg="{{ asset('public/assets/images/contact/'.$image[0]) }}">
-										<div class="f-box c-page text-center typo-white">
-											<div class="feature-icon margin-bottom-10"> 
-											</div>
-											<div class="feature-content">
-												<div class="feature-title">
-												<a href="{{route('equipe.show', $data->slug)}}" class="client-name typo-white"><h5 class="mb-2">{{$data->titre}}</h5></a>
+												<!--Team Inner-->										
+												<div class="team-inner mb-5">												
+													<div class="team-thumb mb-0 relative">
+														<!--Team Overlay-->
+														<div class="team-overlay"></div>
+														<img src="{{ asset('storage/app/public/'.str_replace('\\','/',$data->image)) }}" class="img-fluid thumb w-100" width="480" height="485" alt="{{$data->titre}}" />	
+														<div class="team-overlay-details top-left-overlay typo-white text-center">
+															<div class="social-icons">
+																<a href="{{$data->facebook}}"><span class="ti-facebook"></span></a>
+																<a href="{{$data->youtube}}"><span class="ti-youtube"></span></a>	 	
+																<a href="{{$data->linkedin}}"><span class="ti-linkedin"></span></a>									
+															</div>
+														</div>
+													</div>												
+													<div class="team-details text-center pad-20">
+														<div class="team-name">
+															<h3 class="mb-0"><a href="{{route('equipe.show', $data->slug)}}" class="client-name typo-white">{{$data->titre}}</a></h3>
+														</div>
+														<div class="team-designation"><p class="mb-0">{{$data->poste}}</p></div>
+													</div>
 												</div>
-												<p class="mb-0">{{$data->poste}}</p>
-											</div>											
-										</div>
-									</div>			 
 												<!--Team Inner Ends-->
 											</div>
                                             @endforeach
