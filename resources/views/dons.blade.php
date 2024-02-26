@@ -46,13 +46,9 @@
 												<span class="border-bottom"></span>
 											</div>
 											<div class="pad-top-15">
-												<p class="margin-bottom-20">Vous voulez soutenir les activités de Semeur d’Avenir, veuillez nous écrire à l'adresse suivante : {{setting('site.ContactEmail4')}}</p>
 												<p class="margin-bottom-20">
-                                                Chaque don que vous faites à Semeur d’Avenir a un impact significatif. C’est bien plus qu’un simple don. C’est semer dans la destinée d’une multitude, participer à la transformation de vies et contribuer à la propagation de l’Évangile.
-                                                </p>	
-                                                <p class="margin-bottom-20">
-                                                N’hésitez pas à communiquer avec nous pour toute autre information ou pour obtenir de l’aide au  +225 XX XX XX XX XX ou à {{setting('site.ContactEmail4')}}
-                                                </p>								
+                                                    <?php echo setting('site.FaireDon'); ?>
+                                                </p> 								
 											</div>
 										</div> 
                                         									
